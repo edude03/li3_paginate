@@ -1,0 +1,79 @@
+The Lithium pagination plugin (Li3 Paginate) is a helper designed to make the pagination of records easier within
+the Lithium framework.
+
+### Requirements
+
+In order to make use of this plugin as is, you will need to include or allow a specific route
+in `\app\config\routes.php`. However you decide to do this, you will be required to include the `:controller`,
+`:action` and `:page` slugs.
+
+{{{
+/**
+ * An example route for pagination.
+ */
+Router::connect('/{:controller}/{:action}/page:{:page:[0-9]+}');
+}}}
+
+You may also be required (if you're lazy like me) to either extend the plugin:
+
+{{{
+class YourExtensionName extends \app\libraries\li3_paginate\extensions\helper\Paginator {
+	// feel free to configure the default $config options array via __construct() here if you want to
+	// standardize the way paginators behave throughout your app.
+
+	// This would be easier for many of you as opposed to having to re-configure them in every template that uses them.
+	// :)
+}
+}}}
+
+### Possibly a bad idea ...
+
+Alternatively you could include this plugin directly in your `\app\config\bootstrap\libraries.php`:
+
+{{{
+Libraries::add('li3_paginate');
+}}}
+
+You will also be required to configure your controller action such that the following 3 variables are set namely:
+`$limit`, `$page` and `$total` as explained below.
+
+{{{
+/**
+ * An example of how to set the variables within your controller action.
+ */
+class UsersController extends \lithium\action\Controller {
+
+	public function index() {
+		$limit = 5; // limit the number of results per page
+		$page = $this->request->page ?: 1; // determine the current page or set to 1 by default
+		$order = array('created' => 'DESC'); // sort order
+		$total = Users::count(); // count the no of documents/records
+		$users = Users::all(compact('order','limit','page')); // the data to paginate
+		return compact('users', 'total', 'page', 'limit');
+	}
+
+}
+}}}
+
+### View / Template
+
+Now all you have to do to make use of the standard paginator class within your templates/views is:
+
+{{{
+<?=$this->Paginator->paginate();?>
+}}}
+
+### Advanced Settings & Overrides
+
+It's possible to override configuration setting options like so:
+
+{{{
+<?=$this->Paginator->paginate(array('separator' => ' : '));?>
+// or
+<?=$this->Paginator->config(array('separator' => ' : '));?>
+<?=$this->Paginator->paginate();?>
+}}}
+
+Note: The configuration options are sticky so once set it will apply to all paginate method calls.
+
+Enjoy. Peace.
