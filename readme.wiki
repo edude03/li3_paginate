@@ -76,4 +76,14 @@ It's possible to override configuration setting options like so:
 
 Note: The configuration options are sticky so once set it will apply to all paginate method calls.
 
+If you want to specify an opening and closing tag for each paginate element it can be defined insdie Paginator.php
+
+Custom URLs can be configured by setting the controller and action settings like so: 
+
+{{{
+<?=$this->Paginator->paginate(array('controller' => 'foo', 'action' => 'bar'));?>
+}}}
+
+will force the generated url to /foo/bar/page:1
+
 Enjoy. Peace.
