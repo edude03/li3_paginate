@@ -289,6 +289,9 @@ class Paginator extends \lithium\template\Helper {
 		if (!empty($options)) {
 			$this->config($options);
 		}
+
+		$this->_controller = (empty($this->_config['controller'])) ? $this->_context->_config['request']->params['controller'] : $this->_config['controller'];
+		$this->_action = (empty($this->_config['action'])) ? $this->_context->_config['request']->params['action'] : $this->_config['action'];
 		$content = "";
 		if ($this->_config["showFirstLast"]) {
             $content .= $this->first();
