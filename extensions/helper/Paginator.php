@@ -126,7 +126,12 @@ class Paginator extends \lithium\template\Helper {
 			'separator' => " | ",
 			'separatorFirstLast' => " ",
 			'activePageStyle' => "font-weight:bold;",
-			'activePageClass' => "active"
+			'activePageClass' => "active",
+			'openTag' => "",
+			'closeTag' => "",
+			'controller' => "",
+			'action' => ""
+
 		);
 		parent::__construct($config + $defaults);
 	}
@@ -263,7 +268,7 @@ class Paginator extends \lithium\template\Helper {
 			if ($this->_page == $i) {
 				$buffer .= $this->_config['separator'].$this->_context->html->link($i, $url, array('style' => $this->_config['activePageStyle']));
 			} else {
-				$buffer .= $this->_config['separator'].$this->_context->html->link($i, $url);
+				$buffer .= $this->_config['separator'].$this->_config['openTag'].$this->_context->html->link($i, $url).$this->_config['closeTag'];
 			}
 		}
 		return $buffer;
@@ -284,6 +289,9 @@ class Paginator extends \lithium\template\Helper {
 		if (!empty($options)) {
 			$this->config($options);
 		}
+
+		$this->_controller = (empty($this->_config['controller'])) ? $this->_context->_config['request']->params['controller'] : $this->_config['controller'];
+		$this->_action = (empty($this->_config['action'])) ? $this->_context->_config['request']->params['action'] : $this->_config['action'];
 		$content = "";
 		if ($this->_config["showFirstLast"]) {
             $content .= $this->first();
