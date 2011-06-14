@@ -116,13 +116,13 @@ class Paginator extends \lithium\template\Helper {
 			'showPrevNext' => true,
 			'showNumbers' => true,
 			'firstText' => "<< First",
-            'firstTextDisabled' => "<< First",
+            'firstTextDisabled' => '<span class="disabled"> << First </span>',
 			'prevText' => "< Prev",
-			'prevTextDisabled' => "< Prev",
+			'prevTextDisabled' => '<span class="disabled"> < Prev <span>',
 			'nextText' => "Next >",
-			'nextTextDisabled' => "Next >",
+			'nextTextDisabled' => '<span class="disabled"> Next > </span>',
 			'lastText' => "Last >>",
-            'lastTextDisabled' => "Last >>",
+            'lastTextDisabled' => '<span class="disabled"> Last >> </span>',
 			'separator' => " | ",
 			'separatorFirstLast' => " ",
 			'activePageStyle' => "font-weight:bold;",
@@ -264,7 +264,7 @@ class Paginator extends \lithium\template\Helper {
 		for ($i = $start; $i <= $end; $i++) {
 			$url['page'] = $i;
 			if ($this->_page == $i) {
-				$buffer .= $this->_config['separator'].$this->_context->html->link($i, $url, array('style' => $this->_config['activePageStyle']));
+				$buffer .= $this->_config['separator'].$this->_context->html->link($i, $url, array('class' => 'current'));
 			} else {
 				$buffer .= $this->_config['separator'].$this->_config['openTag'].$this->_context->html->link($i, $url, array('class' => 'page_number')).$this->_config['closeTag'];
 			}
