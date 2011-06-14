@@ -81,7 +81,7 @@ class Paginator extends \lithium\template\Helper {
 	 * @see li3_paginate\extensions\helper\Paginator::paginate()
 	 */
 	protected $_strings = array(
-		'pagingWrapper'	=> '<div>{:content}</div>'
+		'pagingWrapper'	=> '<div class="pagination">{:content}</div>'
 	);
 
 	/**
