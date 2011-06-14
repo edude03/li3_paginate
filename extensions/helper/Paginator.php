@@ -118,7 +118,7 @@ class Paginator extends \lithium\template\Helper {
 			'firstText' => "<< First",
             'firstTextDisabled' => '<span class="disabled"> << First </span>',
 			'prevText' => "< Prev",
-			'prevTextDisabled' => '<span class="disabled"> < Prev <span>',
+			'prevTextDisabled' => '<span class="disabled"> < Prev </span>',
 			'nextText' => "Next >",
 			'nextTextDisabled' => '<span class="disabled"> Next > </span>',
 			'lastText' => "Last >>",
