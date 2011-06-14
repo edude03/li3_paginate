@@ -148,11 +148,16 @@ class Paginator extends \lithium\template\Helper {
 	protected function _init() {
 		parent::_init();
 		// setting up the _config array for use in links etc. with our string templates
-		$this->_controller = $this->_context->_config['request']->params['controller'];
-		$this->_action = $this->_context->_config['request']->params['action'];
+		//$this->_controller = (empty($this->_config['controller'])) ? $this->_context->_config['request']->params['controller'] : $this->_config['controller'];
+		//$this->_action = (empty($this->_config['action'])) ? $this->_context->_config['request']->params['action'] : $this->_config['action'];
 		$this->_page = ($this->_context->_config['data']['page'] + 0) ?: 1;
 		$this->_total = $this->_context->_config['data']['total'];
 		$this->_limit = $this->_context->_config['data']['limit'];
+/*
+		var_dump($this->_controller);
+		var_dump($this->_action);
+		exit();
+		*/
 	}
 
 	/**
@@ -171,7 +176,7 @@ class Paginator extends \lithium\template\Helper {
 				'action' => $this->_action,
 				'page' => 1
 			);
-			return $this->_context->html->link($this->_config['firstText'], $url);
+			return $this->_context->html->link($this->_config['firstText'], $url, array('class' => 'first'));
 		}
 		return $this->_config['firstTextDisabled'];
 	}
@@ -192,7 +197,7 @@ class Paginator extends \lithium\template\Helper {
 				'action' => $this->_action,
 				'page' => ($this->_page - 1)
 			);
-			return $this->_context->html->link($this->_config['prevText'], $url);
+			return $this->_context->html->link($this->_config['prevText'], $url, array('class' => 'prev'));
 		}
 		return $this->_config['prevTextDisabled'];
 	}
@@ -213,7 +218,7 @@ class Paginator extends \lithium\template\Helper {
 				'action' => $this->_action,
 				'page' => ($this->_page + 1)
 			);
-			return $this->_context->html->link($this->_config['nextText'], $url);
+			return $this->_context->html->link($this->_config['nextText'], $url, array('class' => 'next'));
 		}
 		return $this->_config['nextTextDisabled'];
 	}
@@ -235,7 +240,7 @@ class Paginator extends \lithium\template\Helper {
 				'action' => $this->_action,
 				'page' => $end
 			);
-			return $this->_context->html->link($this->_config['lastText'], $url);
+			return $this->_context->html->link($this->_config['lastText'], $url, array('class' => 'last'));
 		}
 		return $this->_config['lastTextDisabled'];
 	}
@@ -268,7 +273,7 @@ class Paginator extends \lithium\template\Helper {
 			if ($this->_page == $i) {
 				$buffer .= $this->_config['separator'].$this->_context->html->link($i, $url, array('style' => $this->_config['activePageStyle']));
 			} else {
-				$buffer .= $this->_config['separator'].$this->_config['openTag'].$this->_context->html->link($i, $url).$this->_config['closeTag'];
+				$buffer .= $this->_config['separator'].$this->_config['openTag'].$this->_context->html->link($i, $url, array('class' => 'page_number')).$this->_config['closeTag'];
 			}
 		}
 		return $buffer;
