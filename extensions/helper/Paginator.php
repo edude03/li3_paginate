@@ -170,13 +170,13 @@ class Paginator extends \lithium\template\Helper {
 			$config = array(
 				'page' => 1
 			);
-			
+
 			$url = \lithium\net\http\Router::match(
 				$config + $this->_context->_config['request']->params,
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
-			
+
 			return $this->_context->html->link($this->_config['firstText'], $url);
 		}
 		return $this->_config['firstTextDisabled'];
@@ -192,17 +192,17 @@ class Paginator extends \lithium\template\Helper {
 		if (!empty($options)) {
 			$this->config($options);
 		}
-		if ($this->_page > 1) {		
+		if ($this->_page > 1) {
 			$config = array(
 				'page' => ($this->_page - 1)
 			);
-			
+
 			$url = \lithium\net\http\Router::match(
 				$config + $this->_context->_config['request']->params,
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
-			
+
 			return $this->_context->html->link($this->_config['prevText'], $url);
 		}
 		return $this->_config['prevTextDisabled'];
@@ -222,13 +222,13 @@ class Paginator extends \lithium\template\Helper {
 			$config = array(
 				'page' => ($this->_page + 1)
 			);
-			
+
 			$url = \lithium\net\http\Router::match(
 				$config + $this->_context->_config['request']->params,
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
-			
+
 			return $this->_context->html->link($this->_config['nextText'], $url);
 		}
 		return $this->_config['nextTextDisabled'];
@@ -245,17 +245,17 @@ class Paginator extends \lithium\template\Helper {
 			$this->config($options);
 		}
 		$end = floor(($this->_total / $this->_limit) + 1);
-		if ($end > $this->_page) {			
+		if ($end > $this->_page) {
 			$config = array(
 				'page' => $end
 			);
-			
+
 			$url = \lithium\net\http\Router::match(
 				$config + $this->_context->_config['request']->params,
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
-			
+
 			return $this->_context->html->link($this->_config['lastText'], $url);
 		}
 		return $this->_config['lastTextDisabled'];
