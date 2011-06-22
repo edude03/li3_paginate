@@ -171,7 +171,7 @@ class Paginator extends \lithium\template\Helper {
 
 
 			$url = \lithium\net\http\Router::match(
-				$config + $this->_context->_config['request']->params,
+				$this->_context->_config['request']->params + array('?' => $config + $this->_context->_config['request']->query),
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
@@ -197,7 +197,7 @@ class Paginator extends \lithium\template\Helper {
 			);
 
 			$url = \lithium\net\http\Router::match(
-				$config + $this->_context->_config['request']->params,
+				$this->_context->_config['request']->params + array('?' => $config + $this->_context->_config['request']->query),
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
@@ -223,7 +223,7 @@ class Paginator extends \lithium\template\Helper {
 			);
 
 			$url = \lithium\net\http\Router::match(
-				$config + $this->_context->_config['request']->params,
+				$this->_context->_config['request']->params + array('?' => $config + $this->_context->_config['request']->query),
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
@@ -250,7 +250,7 @@ class Paginator extends \lithium\template\Helper {
 			);
 
 			$url = \lithium\net\http\Router::match(
-				$config + $this->_context->_config['request']->params,
+				$this->_context->_config['request']->params + array('?' => $config + $this->_context->_config['request']->query),
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
@@ -283,10 +283,12 @@ class Paginator extends \lithium\template\Helper {
 			'controller' => $this->_controller,
 			'action' => $this->_action
 		);
+
+
 		for ($i = $start; $i <= $end; $i++) {
 			$config = array('page' => $i);
 			$url = \lithium\net\http\Router::match(
-				$config + $this->_context->_config['request']->params,
+				$this->_context->_config['request']->params + array('?' => $config + $this->_context->_config['request']->query),
 				$this->_context->_config['request'],
 				array('absolute' => true)
 			);
